@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.paging3.R
 import com.example.paging3.data.model.Country
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -29,14 +30,15 @@ abstract class CountryDatabase: RoomDatabase() {
 
                         INSTANCE?.let { database ->
                             CoroutineScope(Dispatchers.IO).launch {
-                                val assetManager = context.assets
+                                /*val assetManager = context.assets
                                 Log.d("RESULT OPEN FILE", "BEFORE")
-                                val inputStream = assetManager.open("countries.json")
+                                val inputStream = assetManager.open("countries.json")*/
+                                /*val inputStream = context.resources.openRawResource(R.raw.countries)
                                 val jsonString = inputStream.bufferedReader().use { it.readText() }
                                 val countries = Gson().fromJson(jsonString, Array<Country>::class.java).toList()
                                 Log.d("RESULT OPEN FILE", countries.get(0).capital_en)
                                 val countryDao = INSTANCE?.countryDao()
-                                countryDao?.insertAll(countries)
+                                countryDao?.insertAll(countries)*/
                             }
                         }
                     }

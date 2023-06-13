@@ -16,27 +16,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-
-    private lateinit var dao: CountryDao
-    private val viewModel: CountryViewModel by viewModels { CountryViewModelFactory(dao) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        dao = CountryDatabase.getInstance(this).countryDao()
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        val pagingAdapter = CountryAdapter()
-
-        recyclerView.adapter = pagingAdapter
-        recyclerView.apply {
-            addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
-        }
-
-        lifecycleScope.launch {
-            viewModel.items().collectLatest { pageData ->
-                pagingAdapter.submitData(pageData)
-            }
-        }
+        val countryDatabase = CountryDatabase.getInstance(this)
     }
 }
